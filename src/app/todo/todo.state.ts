@@ -5,19 +5,16 @@ import { TodoAction } from "./todo.actions";
 import { tap } from "rxjs";
 
 export interface TodoModel {
-  id?: number;
-  categoryId?: number;
-  title?: string;
-  body?: string;
-  state?: number;
+  id: number;
+  categoryId: number;
+  title: string;
+  body: string;
+  state: number;
 }
 
-export interface TodoList {
-  todoList: TodoModel[]
-}
-
-@State<TodoList>({
+@State<TodoModel[]>({
   name: "TodoState",
+  defaults: []
 })
 @Injectable()
 export class TodoState {
@@ -27,13 +24,13 @@ export class TodoState {
   ) {}
 
   @Selector()
-  static getState(state: TodoList): TodoList {
+  static getState(state: TodoModel[]): TodoModel[] {
     return state
   }
 
   @Action(TodoAction.GetAll)
-  getAll(ctx: StateContext<TodoList>) {
-    return this.http.get<TodoList>("localhost:9000/todo").pipe(
+  getAll(ctx: StateContext<TodoModel[]>) {
+    return this.http.get<TodoModel[]>("localhost:9000/todo").pipe(
       tap(data => {
         ctx.setState(data)
       })
