@@ -30,7 +30,7 @@ export class TodoState {
 
   @Action(TodoAction.GetAll)
   getAll(ctx: StateContext<TodoModel[]>) {
-    return this.http.get<TodoModel[]>("localhost:9000/todo").pipe(
+    return this.http.get<TodoModel[]>("/api/todo").pipe(
       tap(data => {
         ctx.setState(data)
       })
