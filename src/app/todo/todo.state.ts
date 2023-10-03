@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http"
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { TodoAction } from "./todo.actions";
 import { tap } from "rxjs";
 
@@ -25,6 +25,11 @@ export class TodoState {
   constructor(
     private http: HttpClient
   ) {}
+
+  @Selector()
+  static getState(state: TodoList): TodoList {
+    return state
+  }
 
   @Action(TodoAction.GetAll)
   getAll(ctx: StateContext<TodoList>) {
