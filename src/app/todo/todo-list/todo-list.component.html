@@ -1,5 +1,13 @@
 <h2>Todo</h2>
 
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="title">Title</label>
+    <input id="title" type="text" formControlName="title">
+  </div>
+  <button type="submit">Add</button>
+</form>
+
 <ul>
   <li *ngFor="let todo of todoList$ | async">
     {{ todo.title }}
