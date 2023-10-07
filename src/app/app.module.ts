@@ -8,11 +8,13 @@ import { NgxsModule } from '@ngxs/store';
 import { TodoState } from './todo/todo.state';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './user/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent
+    TodoListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
