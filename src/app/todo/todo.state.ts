@@ -37,4 +37,9 @@ export class TodoState {
     )
   }
 
+  @Action(TodoAction.Post)
+  post(ctx: StateContext<TodoModel>, action: TodoAction.Post) {
+    return this.http.post("/api/todo", action.payload)
+  }
+
 }
