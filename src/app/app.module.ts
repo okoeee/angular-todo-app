@@ -7,6 +7,7 @@ import { TodoListComponent } from './todo/todo-list/todo-list.component';
 import { NgxsModule } from '@ngxs/store';
 import { TodoState } from './todo/todo.state';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
     NgxsModule.forRoot([TodoState])
   ],
   providers: [],
