@@ -15,7 +15,8 @@ export class TodoListComponent {
   @Select(TodoState.getState) todoList$?: Observable<TodoModel[]>;
 
   todoForm = this.formBuilder.group({
-    title: ['', Validators.required]
+    title: ['', Validators.required],
+    body: ['', Validators.required]
   })
 
   constructor(
@@ -28,8 +29,14 @@ export class TodoListComponent {
   }
 
   onSubmit(): void {
-    const val = this.todoForm.value
-    console.log(val)
+    const todoForm = this.todoForm.value
+    
+    const data = {
+      title: todoForm.title!,
+      body: todoForm.body!
+    }
+
+    this.store.dispatch(new TodoAction.Post(data))
   }
 
 }
