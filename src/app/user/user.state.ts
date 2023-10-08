@@ -18,4 +18,9 @@ export class UserState {
     return this.http.get("api/verify")
   }
 
+  @Action(UserAction.Login)
+  login(ctx: StateContext<any>, action: UserAction.Login) {
+    return this.http.post("/api/login", action.payload)
+  }
+
 }
