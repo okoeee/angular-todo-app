@@ -9,6 +9,7 @@ import { TodoState } from './todo/todo.state';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './user/login/login.component';
+import { UserState } from './user/user.state';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,10 @@ import { LoginComponent } from './user/login/login.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxsModule.forRoot([TodoState])
+    NgxsModule.forRoot([
+      TodoState,
+      UserState
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
