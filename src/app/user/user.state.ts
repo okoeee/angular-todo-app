@@ -1,9 +1,13 @@
 import { Injectable } from "@angular/core";
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { UserAction } from "./user.action";
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { catchError, map, of } from "rxjs";
+import { catchError, map, of, tap } from "rxjs";
+
+export interface UserModel {
+  csrfToken: string
+}
 
 @State<any>({
   name: "UserState"
@@ -16,9 +20,19 @@ export class UserState {
     private http: HttpClient
   ) {}
 
+  @Selector()
+  static getState(state: UserState): UserState {
+    return state
+  }
+
   @Action(UserAction.Verify)
-  verify(ctx: StateContext<any>) {
-    return this.http.get("api/verify")
+  verify(ctx: StateContext<UserModel>) {
+    return this.http.get<UserModel>("api/verify").pipe(
+      tap(data => {
+        console.log(data)
+        ctx.setState(data)
+      })
+    )
   }
 
   @Action(UserAction.Login)
