@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { TodoModel, TodoState } from '../todo.state';
 import { Select, Store } from '@ngxs/store';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { TodoAction } from '../todo.actions';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserModel, UserState } from 'src/app/user/user.state';
 
 @Component({
   selector: 'app-todo-list',
@@ -13,6 +14,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class TodoListComponent {
 
   @Select(TodoState.getState) todoList$?: Observable<TodoModel[]>;
+  @Select(UserState.getState) userState$!: Observable<UserModel>;
 
   todoForm = this.formBuilder.group({
     title: ['', Validators.required],
@@ -26,6 +28,7 @@ export class TodoListComponent {
 
   ngOnInit() {
     this.store.dispatch(new TodoAction.GetAll())
+    this.userState$.subscribe(data => console.log(`data is: ${data.csrfToken}`))
   }
 
   onSubmit(): void {
