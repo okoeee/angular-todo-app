@@ -27,9 +27,8 @@ export class UserState {
 
   @Action(UserAction.Verify)
   verify(ctx: StateContext<UserModel>) {
-    return this.http.get<UserModel>("api/verify").pipe(
+    return this.http.get<UserModel>("/api/verify").pipe(
       tap(data => {
-        console.log(data)
         ctx.setState(data)
       })
     )
