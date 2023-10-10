@@ -1,22 +1,21 @@
 import { inject } from "@angular/core";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
+import { Store } from "@ngxs/store";
+import { UserAction } from "../user/user.action";
+import { catchError, of, tap } from "rxjs";
 
 export const authGuard = () => {
   const http = inject(HttpClient)
   const router = inject(Router)
+  const store = inject(Store)
 
-  return http.get("api/verify", { observe: 'response' })
-  .subscribe({
-    next: (_: HttpResponse<any>) => {
-      return router.navigate(["/"])
-    },
-    error: (httpResponse: HttpResponse<any>) => {
-      if(httpResponse.status === 401) return router.navigate(["/login"])
-      console.error(`Verify error reason is ${httpResponse.status}: ${httpResponse.statusText}`)
-      return router.navigate(["/login"])
-    },
-    complete: () => {}
-  })
+  return store.dispatch(new UserAction.Verify).pipe(
+    tap(_ => true),
+    catchError(error => {
+      router.navigate(["/login"])
+      return of(false)
+    })
+  )
 
 }
