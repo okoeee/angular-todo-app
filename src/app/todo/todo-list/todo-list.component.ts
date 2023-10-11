@@ -28,12 +28,11 @@ export class TodoListComponent {
 
   ngOnInit() {
     this.store.dispatch(new TodoAction.GetAll())
-    this.userState$.subscribe(data => console.log(`data is: ${data.csrfToken}`))
   }
 
   onSubmit(): void {
     const todoForm = this.todoForm.value
-    
+
     const data = {
       title: todoForm.title!,
       body: todoForm.body!
