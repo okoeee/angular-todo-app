@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http"
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import { HttpClient, HttpHeaders } from "@angular/common/http"
+import { Action, Selector, State, StateContext, Store } from "@ngxs/store";
 import { TodoAction } from "./todo.actions";
 import { tap } from "rxjs";
+import { UserState } from "../user/user.state";
 
 export interface TodoModel {
   id: number;
@@ -20,7 +21,8 @@ export interface TodoModel {
 export class TodoState {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private store: Store
   ) {}
 
   @Selector()
@@ -39,7 +41,11 @@ export class TodoState {
 
   @Action(TodoAction.Post)
   post(ctx: StateContext<TodoModel>, action: TodoAction.Post) {
-    return this.http.post("/api/todo", action.payload)
+    const token = this.store.selectSnapshot(UserState.getState).csrfToken
+    const headers = new HttpHeaders({
+      "Csrf-Token": token
+    })
+    return this.http.post("/api/todo", action.payload, {headers: headers})
   }
 
 }
