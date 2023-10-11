@@ -21,7 +21,7 @@ export class UserState {
   ) {}
 
   @Selector()
-  static getState(state: UserState): UserState {
+  static getState(state: UserModel): UserModel {
     return state
   }
 
