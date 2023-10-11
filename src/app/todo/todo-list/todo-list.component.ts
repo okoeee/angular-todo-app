@@ -33,6 +33,7 @@ export class TodoListComponent {
   onSubmit(): void {
     const todoForm = this.todoForm.value
 
+    // todo categoryIdなどを追加する
     const data = {
       title: todoForm.title!,
       body: todoForm.body!
