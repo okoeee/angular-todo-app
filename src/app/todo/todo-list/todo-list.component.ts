@@ -19,18 +19,18 @@ export class TodoListComponent {
   todoForm = this.formBuilder.group({
     title: ['', Validators.required],
     body: ['', Validators.required],
-    categoryId: [0, Validators.required],
-    state: [0, Validators.required]
+    categoryId: [1, Validators.required],
+    state: [1, Validators.required]
   })
 
   categoryOptions = [
-    {value: 0, name: "フロントエンド"}
+    {value: 1, name: "フロントエンド"}
   ]
 
   statusOptions = [
-    {value: 0, name: "未着手"},
-    {value: 1, name: "進行中"},
-    {value: 2, name: "完了"}
+    {value: 1, name: "未着手"},
+    {value: 2, name: "進行中"},
+    {value: 3, name: "完了"}
   ]
 
   constructor(
@@ -45,10 +45,11 @@ export class TodoListComponent {
   onSubmit(): void {
     const todoForm = this.todoForm.value
 
-    // todo categoryIdなどを追加する
     const data = {
       title: todoForm.title!,
-      body: todoForm.body!
+      body: todoForm.body!,
+      categoryId: todoForm.categoryId!,
+      state: todoForm.state!
     }
 
     this.store.dispatch(new TodoAction.Post(data))
