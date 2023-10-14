@@ -1,15 +1,33 @@
 <h2>Todo</h2>
 
 <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+
   <div>
     <label for="title">Title</label>
     <input id="title" type="text" formControlName="title">
   </div>
+
   <div>
     <label for="title">Body</label>
     <input id="title" type="text" formControlName="body">
   </div>
+
+  <div>
+    <label for="category">Category</label>
+    <select id="category">
+      <option *ngFor="let categoryOption of categoryOptions" [value]="categoryOption.value">{{ categoryOption.name }}</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="Status">Status</label>
+    <select id="Status">
+      <option *ngFor="let statusOption of statusOptions" [value]="statusOption.value">{{ statusOption.name }}</option>
+    </select>
+  </div>
+
   <button type="submit">Add</button>
+
 </form>
 
 <ul>

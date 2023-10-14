@@ -18,8 +18,20 @@ export class TodoListComponent {
 
   todoForm = this.formBuilder.group({
     title: ['', Validators.required],
-    body: ['', Validators.required]
+    body: ['', Validators.required],
+    categoryId: [0, Validators.required],
+    state: [0, Validators.required]
   })
+
+  categoryOptions = [
+    {value: 0, name: "フロントエンド"}
+  ]
+
+  statusOptions = [
+    {value: 0, name: "未着手"},
+    {value: 1, name: "進行中"},
+    {value: 2, name: "完了"}
+  ]
 
   constructor(
     private store: Store,
