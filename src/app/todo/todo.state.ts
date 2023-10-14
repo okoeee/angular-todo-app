@@ -45,7 +45,11 @@ export class TodoState {
     const headers = new HttpHeaders({
       "Csrf-Token": token
     })
-    return this.http.post("/api/todo", action.payload, {headers: headers})
+    return this.http.post("/api/todo", action.payload, {headers: headers}).pipe(
+      tap(_ => {
+        ctx.dispatch(new TodoAction.GetAll())
+      })
+    )
   }
 
 }
