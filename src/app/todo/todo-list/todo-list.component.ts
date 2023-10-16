@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TodoModel, TodoState } from '../todo.state';
 import { Select, Store } from '@ngxs/store';
-import { Observable, first } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TodoAction } from '../todo.actions';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserModel, UserState } from 'src/app/user/user.state';

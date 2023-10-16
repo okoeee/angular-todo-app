@@ -1,5 +1,5 @@
 import { inject } from "@angular/core";
-import { HttpClient, HttpResponse } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Store } from "@ngxs/store";
 import { UserAction } from "../user/user.action";
