@@ -12,4 +12,7 @@ export namespace UserAction {
       }
     ) {}
   }
+  export class Logout {
+    static readonly type = "[User] Logout"
+  }
 }
